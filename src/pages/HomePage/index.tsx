@@ -64,11 +64,12 @@ function HomePage() {
           Hora de abraçar seu{" "}
           <span style={{ color: "#8fff24" }}>lado geek!</span>
         </Typography>
+
         <Button
-          onClick={() => console.log("ver novidades")}
-          size="large"
-          text="Ver as novidades!"
-        />
+          onClick={() => console.log("ver novidades")} size="large">
+          Ver as novidades!
+        </Button>
+
       </HeroBanner>
       <main className="container">
         <StatusHandler isLoading={isLoadingCategories} error={categoriesError}>

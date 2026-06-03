@@ -7,6 +7,8 @@ import Styles from "./CartPage.module.css";
 import { useNavigate } from "react-router-dom";
 
 import { Product } from "../../common/types/product";
+import CartItem from "../../components/CartItem";
+import CartEmptyMessage from "../../components/CartEmptyMessage";
 
 type CartPageProps = {
   cartItems: Product[];
@@ -39,38 +41,10 @@ const CartPage = ({ cartItems, removeFromCart }: CartPageProps) => {
           </Typography>
           {cartItems?.length > 0 ? (
             cartItems.map((item) => (
-              <div key={item.id} className={Styles.cartItem}>
-                <div className={Styles.cartImageContainer}>
-                  <img src={item.imageSrc} alt={item.label} />
-                </div>
-                <div className={Styles.itemDetails}>
-                  <div className={Styles.itemDescription}>
-                    <Typography variantStyle="h6-small">
-                      {item.label}
-                    </Typography>
-                    <Typography variantStyle="body">
-                      {item.description}
-                    </Typography>
-                  </div>
-                  <Typography variantStyle="body-semi-bold">
-                    R$ {item.price}
-                  </Typography>
-                  <Typography variantStyle="body-small-bold">
-                    Quantidade: 1
-                  </Typography>
-                  <Typography variantStyle="body-small-bold">
-                    Tamanho: único
-                  </Typography>
-                  <Button onClick={() => removeFromCart(item.id)}>
-                    Excluir
-                  </Button>
-                </div>
-              </div>
+              <CartItem key={item.id} item={item} removeFromCart={removeFromCart} />
             ))
           ) : (
-            <div style={{ marginTop: "15px" }}>
-              <Typography>Não existem produtos no carrinho.</Typography>
-            </div>
+            <CartEmptyMessage key="empty" />
           )}
         </div>
         <div className={Styles.cartSummary}>
@@ -81,8 +55,8 @@ const CartPage = ({ cartItems, removeFromCart }: CartPageProps) => {
               inputId="cupom"
               inputPlaceholder="Digite o cupom"
               buttonText="Ok"
-              onButtonClick={() => {}}
-              onChange={() => {}}
+              onButtonClick={() => { }}
+              onChange={() => { }}
             />
           </div>
           <div className={Styles.summaryResume}>
@@ -104,15 +78,8 @@ const CartPage = ({ cartItems, removeFromCart }: CartPageProps) => {
             </Typography>
           </div>
           <div className={Styles.cartActions}>
-            <Button
-              onClick={handleRedirect}
-              variant="secondary"
-              text="Continuar comprando"
-            />
-            <Button
-              onClick={() => console.log("pagamento")}
-              text="Ir para pagamento"
-            />
+            <Button onClick={handleRedirect} variant="secondary">Continuar comprando</Button>
+            <Button onClick={() => console.log("pagamento")}>Ir para pagamento</Button>
           </div>
         </div>
       </section>
