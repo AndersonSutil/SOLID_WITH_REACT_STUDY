@@ -34,7 +34,7 @@ function HomePage() {
         setCategories(response.data.categories);
         setIsLoadingCategories(false);
       })
-      .catch((err) => {
+      .catch(() => {
         setCategoriesError("Erro ao carregar categorias.");
         setIsLoadingCategories(false);
       });
@@ -48,7 +48,7 @@ function HomePage() {
         setProducts(response.data.products);
         setIsLoadingProducts(false);
       })
-      .catch((err) => {
+      .catch(() => {
         setProductsError("Erro ao carregar produtos.");
         setIsLoadingProducts(false);
       });
