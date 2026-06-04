@@ -8,6 +8,7 @@ import ProductDetail from "../../components/ProductDetail/ProductDetail";
 import { PRODUCTS_BASE_URL } from "../../common/constants/endpoints";
 import { Product } from "../../common/types/product";
 import StatusHandler from "../../common/utils/statusHandler";
+import BackgroundBanner from "../../components/BackgroundBanner";
 
 type ProductDetailsPageProps = {
   addToCart: (product: Product) => void;
@@ -18,6 +19,7 @@ function ProductDetailsPage({ addToCart }: ProductDetailsPageProps) {
   const [product, setProduct] = useState<Product | null>(null);
   const [isLoading, setIsLoading] = useState(true);
   const [error, setError] = useState<string | null>(null);
+  const randomImageUrl = import.meta.env.VITE_IMAGE_BASE_BANNER_URL;
 
   useEffect(() => {
     // Faz a requisição para buscar o produto com base no ID
@@ -35,36 +37,39 @@ function ProductDetailsPage({ addToCart }: ProductDetailsPageProps) {
         }
         setIsLoading(false);
       })
-      .catch((err) => {
+      .catch(() => {
         setError("Erro ao carregar os detalhes do produto.");
         setIsLoading(false);
       });
   }, [id]);
 
   return (
-    <main className="container">
-      <section>
-        <div className={Styles.productContainer}>
-          <Typography variant="h4">Detalhes do Produto</Typography>
+    <>
+    <BackgroundBanner backgroundImage={randomImageUrl}/>
+      <main className="container">
+        <section>
+          <div className={Styles.productContainer}>
+            <Typography variant="h4">Detalhes do Produto</Typography>
 
-          <StatusHandler isLoading={isLoading} error={error}>
-            {product ? (
-              <ProductDetail
-                id={product.id}
-                title={product.label}
-                description={product.description}
-                price={product.price}
-                imageUrl={product.imageSrc}
-                colors={product.colors}
-                addToCart={addToCart}
-              />
-            ) : (
-              <p>Produto não encontrado.</p>
-            )}
-          </StatusHandler>
-        </div>
-      </section>
-    </main>
+            <StatusHandler isLoading={isLoading} error={error}>
+              {product ? (
+                <ProductDetail
+                  id={product.id}
+                  title={product.label}
+                  description={product.description}
+                  price={product.price}
+                  imageUrl={product.imageSrc}
+                  colors={product.colors}
+                  addToCart={addToCart}
+                />
+              ) : (
+                <p>Produto não encontrado.</p>
+              )}
+            </StatusHandler>
+          </div>
+        </section>
+      </main>
+    </>
   );
 }
 
