@@ -5,7 +5,13 @@ import Field from "../Field";
 import Typography from "../Typography";
 import Styles from "./CartSummary.module.css";
 
-const CartSummary = ({ cartItems, total, freight }: { cartItems: unknown[]; total: number; freight: number }) => {
+type CartSummaryProps = {
+    cartItems: unknown[];
+    total: number;
+    freight: number;
+};
+
+const CartSummary = ({ cartItems, total, freight }: CartSummaryProps) => {
     return (
         <div className={Styles.cartSummary}>
             <Typography variantStyle="heading-small">Sumário</Typography>
@@ -45,6 +51,3 @@ const CartSummary = ({ cartItems, total, freight }: { cartItems: unknown[]; tota
 };
 
 export default CartSummary;
-
-
-
